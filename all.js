@@ -70,6 +70,7 @@ function renderFaster() {
         teams[item.jsGroup].seconds += parseInt(item.practiceMinute)  * 60 + parseInt(item.practiceSecond);
     })
 
+
     let keys = Object.keys(teams);
     let result = [];
     keys.forEach(function (item) {
@@ -118,6 +119,7 @@ function templateBmiKata(index, item) {
         <td>${item.haveTen}</td>
         <td>${youtubeBtn}</td>
         <td>${codeBtn}</td>
+        <td>${item.message ?? ""}</td>
     </tr>
     `;
 }
@@ -162,7 +164,7 @@ function changePage(event) {
     document.querySelectorAll(".page-link").forEach(function (element) {
         element.parentElement.classList.remove("active");
         if (pageNo == element.getAttribute('data-page')) {
-            element.parentElement.classList.remove("active");
+            element.parentElement.classList.add("active");
         }
     })
 }
