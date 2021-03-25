@@ -1,14 +1,16 @@
 let data = [];
 
-axios.get('https://raw.githubusercontent.com/hexschool/js-traninging-week6API/main/data.json').then(function(response){
+axios.get('https://raw.githubusercontent.com/hexschool/js-traninging-week6API/main/data.json').then(function (response) {
     data = response.data;
     renderData();
+    renderComplete();
+    renderFaster();
 })
 
 function renderData() {
     let index = 0;
     let resultHtml = "";
-    data.forEach(function(item) {
+    data.forEach(function (item) {
         index++;
         let itemHtml = templateBmiKata(index, item);
         resultHtml += itemHtml;
@@ -19,17 +21,52 @@ function renderData() {
     renderPage(1);
 }
 
+function renderComplete() {
+    let team = {};
 
-function templateBmiKata(index , item) {
+    data.forEach(function (item) {
+        if (team[item.jsGroup] == undefined) {
+            team[item.jsGroup] = 0;
+        }
+        team[item.jsGroup]++;
+    })
+
+    let keys = Object.keys(team);
+    let result = [];
+    keys.forEach(function (item) {
+        result.push({ jsGroup: item, people: team[item] })
+    })
+
+    result.sort(function (a, b) {
+        return a.people > b.people ? -1 : 1;
+    })
+
+    let resultHtml = "";
+    let index = 0;
+    result.forEach(function (item) {
+        index++;
+        if(index <= 5) {
+            resultHtml += templateComplete(index, item);
+        }
+    })
+
+    document.querySelector("#completeTable tbody").innerHTML = resultHtml;
+}
+
+function renderFaster() {
+
+}
+
+function templateBmiKata(index, item) {
     let youtubeBtn = "";
     let codeBtn = "";
     let pageNo = Math.ceil(index / 10);
 
-    if(item.youtubeUrl != ""){
+    if (item.youtubeUrl != "") {
         youtubeBtn = `<a href="${item.youtubeUrl}">Click</a>`;
     }
 
-    if(item.codepenUrl != ""){
+    if (item.codepenUrl != "") {
         codeBtn = `<a href="${item.codepenUrl}">Click</a>`;
     }
 
@@ -47,7 +84,17 @@ function templateBmiKata(index , item) {
     `;
 }
 
-function templateComplete(index , item) {
+function templateComplete(index, item) {
+    return `
+        <tr>
+            <th scope="row">${index}</th>
+            <td>${item.jsGroup}</td>
+            <td>${item.people}</td>
+        </tr>
+    `;
+}
+
+function templateFaster(index, item) {
     return `
         <th scope="row">${index}</th>
         <td>${item.jsGroup}</td>
@@ -55,22 +102,14 @@ function templateComplete(index , item) {
     `;
 }
 
-function templateFaster(index , item) {
-    return `
-        <th scope="row">${index}</th>
-        <td>${item.jsGroup}</td>
-        <td>${item.people}</td>
-    `;
-}
-
 function renderPage(pageNo) {
 
-    document.querySelectorAll(".page-display").forEach(function(element) {
+    document.querySelectorAll(".page-display").forEach(function (element) {
         element.style.display = "none";
     })
 
-    document.querySelectorAll(".page-" + pageNo).forEach(function(element) {
-        element.style.display =  "table-row";
+    document.querySelectorAll(".page-" + pageNo).forEach(function (element) {
+        element.style.display = "table-row";
     })
 
 }
@@ -80,14 +119,14 @@ function changePage(event) {
     let pageNo = event.target.getAttribute('data-page');
     renderPage(pageNo);
 
-    document.querySelectorAll(".page-link").forEach(function(element) {
+    document.querySelectorAll(".page-link").forEach(function (element) {
         element.parentElement.classList.remove("active");
-        if(pageNo == element.getAttribute('data-page')){
+        if (pageNo == element.getAttribute('data-page')) {
             element.parentElement.classList.remove("active");
         }
     })
 }
 
-document.querySelectorAll(".page-link").forEach(function(element) {
+document.querySelectorAll(".page-link").forEach(function (element) {
     element.addEventListener("click", changePage);
 })
