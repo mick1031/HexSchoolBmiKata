@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI kata</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row mt-5 mb-2">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        最多人完成的組別
+                    </div>
+                    <div class="card-body overflow-auto">
+                        <table class="table table-hover" id="completeTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Team No.</th>
+                                    <th scope="col">People</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        平均最速組別
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover" id="fasterTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Team No.</th>
+                                    <th scope="col">Average Seconds</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Thornton</td>
+                                    <td>Thornton</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        BMI kata
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover border-bottom " id="bmiKataTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Slack Name</th>
+                                    <th scope="col">Team No.</th>
+                                    <th scope="col">Minutes</th>
+                                    <th scope="col">Seconds</th>
+                                    <th scope="col">10 Times</th>
+                                    <th scope="col">Youtube Link</th>
+                                    <th scope="col">Code Link</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li class="page-item active"><a class="page-link" data-page="1" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" data-page="2" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" data-page="3" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" data-page="4" href="#">4</a></li>
+                                <li class="page-item"><a class="page-link" data-page="5" href="#">5</a></li>
+                                <li class="page-item"><a class="page-link" data-page="6" href="#">6</a></li>
+                                <li class="page-item"><a class="page-link" data-page="7" href="#">7</a></li>
+                                <li class="page-item"><a class="page-link" data-page="8" href="#">8</a></li>
+                                <li class="page-item"><a class="page-link" data-page="9" href="#">9</a></li>
+                                <li class="page-item"><a class="page-link" data-page="10" href="#">10</a></li>
+                                <li class="page-item"><a class="page-link" data-page="11" href="#">11</a></li>
+                                <li class="page-item"><a class="page-link" data-page="12" href="#">12</a></li>
+                                <li class="page-item"><a class="page-link" data-page="13" href="#">13</a></li>
+                                <li class="page-item"><a class="page-link" data-page="14" href="#">14</a></li>
+                                <li class="page-item"><a class="page-link" data-page="15" href="#">15</a></li>
+                                <li class="page-item"><a class="page-link" data-page="16" href="#">16</a></li>
+                                <li class="page-item"><a class="page-link" data-page="17" href="#">17</a></li>
+                                <li class="page-item"><a class="page-link" data-page="18" href="#">18</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./all.js"></script>
+</body>
+
+</html>
