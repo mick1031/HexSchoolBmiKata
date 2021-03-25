@@ -22,19 +22,22 @@ function renderData() {
 }
 
 function renderComplete() {
-    let team = {};
+    let teams = {};
 
     data.forEach(function (item) {
-        if (team[item.jsGroup] == undefined) {
-            team[item.jsGroup] = 0;
+        if (teams[item.jsGroup] == undefined) {
+            teams[item.jsGroup] = 0;
         }
-        team[item.jsGroup]++;
+        teams[item.jsGroup]++;
     })
 
-    let keys = Object.keys(team);
+    let keys = Object.keys(teams);
     let result = [];
     keys.forEach(function (item) {
-        result.push({ jsGroup: item, people: team[item] })
+        result.push({ 
+            jsGroup: item, 
+            people: teams[item] 
+        })
     })
 
     result.sort(function (a, b) {
@@ -54,7 +57,42 @@ function renderComplete() {
 }
 
 function renderFaster() {
+    let teams = {};
 
+    data.forEach(function (item) {
+        if (teams[item.jsGroup] == undefined) {
+            teams[item.jsGroup] = {
+                people: 0,
+                seconds: 0
+            };
+        }
+        teams[item.jsGroup].people ++;
+        teams[item.jsGroup].seconds += parseInt(item.practiceMinute)  * 60 + parseInt(item.practiceSecond);
+    })
+
+    let keys = Object.keys(teams);
+    let result = [];
+    keys.forEach(function (item) {
+        result.push({ 
+            jsGroup: item, 
+            practiceSecond: (teams[item].seconds / teams[item].people).toFixed(2)
+        })
+    })
+
+    result.sort(function (a, b) {
+        return a.practiceSecond > b.practiceSecond ? 1 : -1;
+    })
+    
+    let resultHtml = "";
+    let index = 0;
+    result.forEach(function (item) {
+        index++;
+        if(index <= 5) {
+            resultHtml += templateFaster(index, item);
+        }
+    })
+
+    document.querySelector("#fasterTable tbody").innerHTML = resultHtml;
 }
 
 function templateBmiKata(index, item) {
@@ -63,11 +101,11 @@ function templateBmiKata(index, item) {
     let pageNo = Math.ceil(index / 10);
 
     if (item.youtubeUrl != "") {
-        youtubeBtn = `<a href="${item.youtubeUrl}">Click</a>`;
+        youtubeBtn = `<a href="${item.youtubeUrl}" target="_blank">Click</a>`;
     }
 
     if (item.codepenUrl != "") {
-        codeBtn = `<a href="${item.codepenUrl}">Click</a>`;
+        codeBtn = `<a href="${item.codepenUrl}" target="_blank">Click</a>`;
     }
 
     return `
@@ -96,9 +134,11 @@ function templateComplete(index, item) {
 
 function templateFaster(index, item) {
     return `
-        <th scope="row">${index}</th>
-        <td>${item.jsGroup}</td>
-        <td>${item.practiceSecond}</td>
+        <tr>
+            <th scope="row">${index}</th>
+            <td>${item.jsGroup}</td>
+            <td>${item.practiceSecond}</td>
+        </tr>
     `;
 }
 
